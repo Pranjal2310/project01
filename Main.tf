@@ -102,4 +102,4 @@ resource "aws_security_group" "sec_grp" {
   }
 }
 
-resource "aws_lambda_function" "lambda"
+#resource "aws_lambda_function" "lambda"
