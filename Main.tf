@@ -11,9 +11,13 @@ resource "aws_vpc" "project" {                # Creating VPC here
   }
 }
 
-
-    
-
+terraform {
+  backend "s3" {
+    bucket = "pranjal2310"
+    key    = "terraform.tfstate"
+    region = "us-east-2"
+  }
+}
 
 resource "aws_subnet" "privatesubnet" {
    vpc_id =  aws_vpc.project.id
@@ -22,7 +26,6 @@ resource "aws_subnet" "privatesubnet" {
     Name = "private"
   }
  }
-
 
 resource "aws_route_table" "PrivateRT" {    # Creating RT for Private Subnet
    vpc_id = aws_vpc.project.id
@@ -34,8 +37,6 @@ resource "aws_route_table" "PrivateRT" {    # Creating RT for Private Subnet
     Name = "privaRT"
   }
  }
-
-
 
 resource "aws_route_table_association" "PrivateRTassociation" {
     subnet_id = aws_subnet.privatesubnet.id
@@ -102,4 +103,3 @@ resource "aws_security_group" "sec_grp" {
   }
 }
 
-#resource "aws_lambda_function" "lambda"
