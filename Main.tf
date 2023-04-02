@@ -73,3 +73,10 @@ resource "aws_security_group" "sec_grp" {
   }
 }
 
+resource "aws_lambda_function" "suyog_lambda" {
+  filename         = "xyz_lambda.zip"
+  function_name    = "suyog_lambda"
+  handler          = "abc_lambda.handler"
+  runtime          = "python3.8"
+  role             = aws_iam_role.example_lambda.arn
+  source_code_hash = filebase64sha256("xyz_lambda.zip")
