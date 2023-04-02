@@ -11,13 +11,6 @@ resource "aws_vpc" "project" {                # Creating VPC here
   }
 }
 
-terraform {
-  backend "s3" {
-    bucket = "pranjal2310"
-    key    = "terraform.tfstate"
-    region = "us-east-2"
-  }
-}
 
 resource "aws_subnet" "privatesubnet" {
    vpc_id =  aws_vpc.project.id
