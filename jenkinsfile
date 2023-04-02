@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                sh 'terraform plan'
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                sh 'terraform apply --auto-approve'
+            }
+        }
+        stage('Invoke Lambda Function') {
+            steps {
+        script {
+            def lambda = aws.lambda(region: 'us-west-2')
+            def response = lambda.invokeFunction(
+                functionName: 'my-lambda-function',
+                payload: '{"key1": "value1", "key2": "value2", "key3": "value3"}'
+            )
+            echo "Lambda Function Response: ${response.payload}"
+        }
+    }
+}
+   
