@@ -80,3 +80,4 @@ resource "aws_lambda_function" "suyog_lambda" {
   runtime          = "python3.8"
   role             = aws_iam_role.example_lambda.arn
   source_code_hash = filebase64sha256("xyz_lambda.zip")
+}
