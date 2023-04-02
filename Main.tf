@@ -4,6 +4,14 @@ provider "aws" {
   secret_key = "NNi0QXD9L81QeOjEM"
   
 }
+
+terraform {
+  backend "s3" {
+    bucket = "pranjal2310"
+    key    = "terraform.tfstate"
+    region = "us-east-2"
+  }
+}
 resource "aws_vpc" "project" {                # Creating VPC here
    cidr_block       = "10.0.0.0/16"           ## Defining the CIDR block use 10.0.0.0/24 for demo
    instance_tenancy = "default"
